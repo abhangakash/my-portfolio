@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
 
-export async function POST(req) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourportfolio.vercel.app'
-  const res = NextResponse.redirect(new URL('/', siteUrl))
+export async function POST() {
+  const res = NextResponse.json({ success: true })
   res.cookies.set('vault_token', '', {
     httpOnly: true,
     secure: true,

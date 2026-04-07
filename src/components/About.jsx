@@ -18,7 +18,7 @@ export default function About() {
               Engineering with <span className="text-indigo-600 italic">Purpose.</span>
             </h3>
           </div>
-          <div className="text-slate-400 font-mono text-sm hidden md:block">
+          <div className="text-slate-600 font-mono text-sm hidden md:block">
             Based in Pune, India
           </div>
         </div>
@@ -79,9 +79,9 @@ export default function About() {
               <div className="space-y-8">
                 <div className="relative pl-6 border-l-2 border-indigo-200">
                   <div className="absolute -left-[7px] top-0 w-[12px] h-[12px] rounded-full bg-indigo-600 border-2 border-white" />
-                  <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-1">Bachelor of Engineering</p>
+                  <p className="text-[10px] font-black text-indigo-700 uppercase tracking-widest mb-1">Bachelor of Engineering</p>
                   <h5 className="font-bold text-slate-900 text-lg leading-tight">Information Technology (2025) </h5>
-                  <p className="text-slate-500 text-sm mt-1 font-medium">Sinhgad College of Engineering, Pune</p>
+                  <p className="text-slate-600 text-sm mt-1 font-medium">Sinhgad College of Engineering, Pune</p>
                   
                   <div className="mt-4 flex items-center gap-2 text-indigo-700 bg-indigo-50 w-fit px-3 py-1 rounded-full border border-indigo-100">
                     <CheckCircle2 size={14} />
@@ -90,7 +90,7 @@ export default function About() {
                 </div>
 
                 <div className="pt-4">
-                  <h5 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                  <h5 className="text-xs font-black text-slate-600 uppercase tracking-widest mb-4 flex items-center gap-2">
                     <Code2 size={14} /> Fundamental Domains
                   </h5>
                   <div className="flex flex-wrap gap-2">

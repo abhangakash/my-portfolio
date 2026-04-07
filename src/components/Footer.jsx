@@ -74,7 +74,7 @@ export default function Footer() {
               <li className="pt-4">
                 <button 
                   onClick={scrollToTop}
-                  className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-slate-900 transition-all uppercase tracking-widest"
+                  className="flex items-center gap-2 text-xs font-bold text-gray-600 hover:text-slate-900 transition-all uppercase tracking-widest"
                 >
                   Back to Top <ArrowUp size={14} />
                 </button>
@@ -84,7 +84,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-400">
+        <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-600">
           <p>© {new Date().getFullYear()} Akash Abhang • B.E. Information Technology</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5">

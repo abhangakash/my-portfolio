@@ -33,9 +33,9 @@ export default function Skills() {
   ];
 
   const problemSolving = [
-    { platform: "LeetCode", solved: "240+", rank: "Top 10%", link: "https://leetcode.com/u/akashabhang/", color: "text-yellow-500" },
-    { platform: "GeeksforGeeks & Hackerrank", solved: "100+", rank: "Active Solver", link: "https://www.hackerrank.com/profile/iakashabhang", color: "text-green-600" },
-    { platform: "Total Solved", solved: "500+", rank: "Across Different Platforms", link: "#", color: "text-orange-500" }
+    { platform: "LeetCode", solved: "240+", rank: "Top 10%", link: "https://leetcode.com/u/akashabhang/", color: "text-amber-700" },
+    { platform: "GeeksforGeeks & Hackerrank", solved: "100+", rank: "Active Solver", link: "https://www.hackerrank.com/profile/iakashabhang", color: "text-green-700" },
+    { platform: "Total Solved", solved: "500+", rank: "Across Different Platforms", link: "#", color: "text-orange-700" }
   ];
 
   return (

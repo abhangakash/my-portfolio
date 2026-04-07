@@ -33,7 +33,7 @@ export default function Contact() {
               
               {/* Email Block */}
               <div className="bg-white p-8">
-                <div className="flex items-center gap-2 text-slate-400 mb-3">
+                <div className="flex items-center gap-2 text-slate-600 mb-3">
                   <Mail size={16} />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Email Address</span>
                 </div>
@@ -51,7 +51,7 @@ export default function Contact() {
 
               {/* Location Block */}
               <div className="bg-white p-8">
-                <div className="flex items-center gap-2 text-slate-400 mb-3">
+                <div className="flex items-center gap-2 text-slate-600 mb-3">
                   <MapPin size={16} />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Current Location</span>
                 </div>
@@ -64,7 +64,7 @@ export default function Contact() {
                 target="_blank" 
                 className="bg-white p-8 hover:bg-slate-50 transition-colors block"
               >
-                <div className="flex items-center gap-2 text-slate-400 mb-3">
+                <div className="flex items-center gap-2 text-slate-600 mb-3">
                   <Linkedin size={16} />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Professional Network</span>
                 </div>
@@ -79,7 +79,7 @@ export default function Contact() {
                 target="_blank" 
                 className="bg-white p-8 hover:bg-slate-50 transition-colors block"
               >
-                <div className="flex items-center gap-2 text-slate-400 mb-3">
+                <div className="flex items-center gap-2 text-slate-600 mb-3">
                   <Github size={16} />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Source Code</span>
                 </div>
@@ -99,15 +99,15 @@ export default function Contact() {
             
             <ul className="space-y-6">
               <li className="flex flex-col">
-                <span className="text-[10px] font-bold text-slate-400 uppercase">Availability</span>
+                <span className="text-[10px] font-bold text-slate-600 uppercase">Availability</span>
                 <span className="text-sm font-semibold text-slate-800">Immediate </span>
               </li>
               <li className="flex flex-col">
-                <span className="text-[10px] font-bold text-slate-400 uppercase">Preferred Roles</span>
+                <span className="text-[10px] font-bold text-slate-600 uppercase">Preferred Roles</span>
                 <span className="text-sm font-semibold text-slate-800">SDE-1, Full Stack Developer, Backend Developer, Analyst</span>
               </li>
               <li className="flex flex-col">
-                <span className="text-[10px] font-bold text-slate-400 uppercase">Work Model</span>
+                <span className="text-[10px] font-bold text-slate-600 uppercase">Work Model</span>
                 <span className="text-sm font-semibold text-slate-800">On-site / Remote / Hybrid</span>
               </li>
             </ul>

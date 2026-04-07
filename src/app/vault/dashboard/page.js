@@ -249,25 +249,30 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Nav bar */}
-        <div style={{ background: '#fff', borderBottom: '1px solid #f1f5f9' }} className="sticky top-0 z-40">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center text-sm"
-                style={{ background: '#0f172a' }}>
-                🔐
-              </div>
-              <span className="font-semibold text-slate-800 text-sm">A's Vault</span>
-            </div>
-            {/* ✅ logout button calls the hook function directly */}
-            <button
-              onClick={logout}
-              className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-red-400 transition-colors"
-            >
-              Logout ↗
-            </button>
-          </div>
-        </div>
+       {/* Nav bar */}
+<div style={{ background: '#fff', borderBottom: '1px solid #f1f5f9' }} className="sticky top-0 z-40">
+  <div className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+    <div className="flex items-center gap-2.5">
+      <div className="w-8 h-8 rounded-xl flex items-center justify-center text-sm"
+        style={{ background: '#0f172a' }}>
+        🔐
+      </div>
+      <span className="font-semibold text-slate-800 text-sm">A's Vault</span>
+    </div>
+
+    {/* Updated Logout Button: Better tap target & cleaner look */}
+    <button
+      onClick={logout}
+      className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-100 
+                 text-[11px] font-bold uppercase tracking-tight text-slate-400 
+                 transition-all hover:bg-slate-50 hover:text-red-500 hover:border-red-100
+                 active:scale-95"
+    >
+      <span>Logout</span>
+      <span className="text-xs">↗</span>
+    </button>
+  </div>
+</div>
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-5 sm:py-8 space-y-4 sm:space-y-5">
 

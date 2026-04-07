@@ -1,91 +1,133 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, FileText, ArrowRight } from "lucide-react";
+import { Github, Linkedin, FileText, ArrowRight, Download } from "lucide-react";
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, delay, ease: "easeOut" },
+});
+
+const techStack = [
+  { label: "MERN Stack",        num: "01" },
+  { label: "Java Spring Boot",  num: "02" },
+  { label: "AWS & Cloud",       num: "03" },
+];
 
 export default function Hero() {
   return (
-    <section className="min-h-[90vh] flex items-center bg-white text-slate-900 selection:bg-indigo-100 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-20">
-        
-        {/* Status Badge */}
-        <motion.div 
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-3 py-1 mb-6 md:mb-8 rounded-full border border-emerald-100 bg-emerald-50 text-emerald-700 text-[10px] sm:text-xs font-bold uppercase tracking-wider"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+    <section className="relative min-h-[100svh] flex items-center bg-white text-slate-900 selection:bg-indigo-100 overflow-hidden">
+
+      {/* Subtle grid decoration – purely visual, hidden from screen readers */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #334155 1px, transparent 1px), linear-gradient(to bottom, #334155 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+      />
+
+      <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28 md:py-32">
+
+        {/* ── Status badge ── */}
+        <motion.div {...fadeUp(0)} className="mb-7 sm:mb-9">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest">
+            <span className="relative flex h-2 w-2 flex-shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            Open to Full-Time Roles
           </span>
-          Open to Full-Time Roles
         </motion.div>
 
-        {/* Name & Title */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+        {/* ── Name ── */}
+        <motion.h1
+          {...fadeUp(0.1)}
+          className="text-[clamp(2.5rem,10vw,6.5rem)] font-black tracking-tight leading-[1.05] text-slate-900 mb-4 sm:mb-6"
         >
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black mb-4 md:mb-6 tracking-tight text-slate-900 leading-[1.1]">
-            Akash Abhang.
-          </h1>
-          <h2 className="text-lg sm:text-2xl md:text-4xl text-slate-500 mb-8 md:mb-10 font-semibold leading-snug max-w-3xl">
-            Software Engineer specializing in <span className="text-slate-900">Scalable Systems</span> & Distributed Architectures.
-          </h2>
-        </motion.div>
+          Akash Abhang.
+        </motion.h1>
 
-        {/* Quick Tech Snapshot */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="flex flex-wrap gap-x-6 md:gap-x-8 gap-y-3 mb-10 md:mb-12"
+        {/* ── Tagline ── */}
+        <motion.h2
+          {...fadeUp(0.2)}
+          className="text-[clamp(1rem,3.2vw,2rem)] font-semibold leading-snug text-slate-500 max-w-2xl mb-9 sm:mb-11"
         >
-          {["MERN Stack", "Java Spring Boot", "AWS & Cloud"].map((tech, i) => (
-            <div key={tech} className="flex items-center gap-2 text-[10px] sm:text-xs md:text-sm font-mono text-slate-500">
-              <span className="text-indigo-600 font-bold">0{i + 1}</span> {tech}
-            </div>
+          Software Engineer specializing in{" "}
+          <span className="text-slate-900">Scalable Systems</span> &amp;{" "}
+          Distributed Architectures.
+        </motion.h2>
+
+        {/* ── Tech snapshot ── */}
+        <motion.ul
+          {...fadeUp(0.3)}
+          className="flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-2.5 mb-10 sm:mb-12 list-none p-0 m-0"
+        >
+          {techStack.map(({ label, num }) => (
+            <li key={label} className="flex items-center gap-2 text-[11px] sm:text-xs font-mono text-slate-500">
+              <span className="text-indigo-600 font-bold select-none">{num}</span>
+              {label}
+            </li>
           ))}
-        </motion.div>
+        </motion.ul>
 
-        {/* Action Bar */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="flex flex-col gap-6"
-        >
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-start sm:items-center">
-            {/* Primary CTA */}
-            <button className="w-full sm:w-auto group flex items-center justify-center gap-2 bg-slate-900 text-white hover:bg-indigo-600 transition-all px-6 md:px-8 py-3.5 md:py-4 rounded-full font-bold shadow-xl shadow-slate-200 text-sm md:text-base">
-              View Projects 
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+        {/* ── CTA row ── */}
+        <motion.div {...fadeUp(0.4)} className="flex flex-col gap-5 sm:gap-0 sm:flex-row sm:items-center sm:flex-wrap">
 
-            {/* Resume Buttons Group */}
-            <div className="flex flex-row gap-3 w-full sm:w-auto">
-              <a href="/resume.pdf" target="_blank" className="flex-1 sm:flex-none">
-                <button className="w-full flex items-center justify-center gap-2 bg-slate-100 text-slate-900 px-5 md:px-7 py-3.5 md:py-4 rounded-full font-bold hover:bg-slate-200 transition text-xs md:text-sm">
-                  <FileText size={16} /> View CV
+          {/* Primary + CV buttons */}
+          <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 sm:mr-8">
+
+            <a href="#projects" className="group">
+              <button className="w-full xs:w-auto flex items-center justify-center gap-2 bg-slate-900 text-white hover:bg-indigo-600 transition-colors duration-200 px-7 py-3.5 rounded-full font-bold text-sm leading-none shadow-lg shadow-slate-200/70">
+                View Projects
+                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+              </button>
+            </a>
+
+            <div className="flex gap-2.5">
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex-1 xs:flex-none">
+                <button className="w-full flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-900 transition-colors duration-200 px-5 py-3.5 rounded-full font-bold text-xs leading-none">
+                  <FileText size={14} strokeWidth={2.2} />
+                  View CV
                 </button>
               </a>
-
-              <a href="/resume.pdf" download className="flex-1 sm:flex-none">
-                <button className="w-full flex items-center justify-center gap-2 bg-white border border-slate-200 hover:border-slate-900 transition-all px-5 md:px-7 py-3.5 md:py-4 rounded-full font-bold text-slate-700 text-xs md:text-sm">
+              <a href="/resume.pdf" download className="flex-1 xs:flex-none">
+                <button className="w-full flex items-center justify-center gap-2 bg-white border border-slate-200 hover:border-slate-400 text-slate-700 transition-colors duration-200 px-5 py-3.5 rounded-full font-bold text-xs leading-none">
+                  <Download size={14} strokeWidth={2.2} />
                   Download
                 </button>
               </a>
             </div>
           </div>
 
-          {/* Social Access */}
-          <div className="flex gap-6 items-center pt-4 sm:pt-0 sm:border-l sm:border-slate-200 sm:pl-8 w-fit">
-            <a href="https://github.com/abhangakash" target="_blank" className="text-slate-400 hover:text-slate-900 transition-colors" aria-label="GitHub">
-              <Github size={24} />
+          {/* Divider – horizontal on mobile, vertical on sm+ */}
+          <div
+            aria-hidden="true"
+            className="hidden sm:block self-stretch w-px bg-slate-200 mx-1"
+          />
+
+          {/* Social icons */}
+          <div className="flex items-center gap-5 sm:pl-7">
+            <a
+              href="https://github.com/abhangakash"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="text-slate-400 hover:text-slate-900 transition-colors duration-200"
+            >
+              <Github size={22} />
             </a>
-            <a href="https://www.linkedin.com/in/akash-abhang-a6a29822b" target="_blank" className="text-slate-400 hover:text-slate-900 transition-colors" aria-label="LinkedIn">
-              <Linkedin size={24} />
+            <a
+              href="https://www.linkedin.com/in/akash-abhang-a6a29822b"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="text-slate-400 hover:text-slate-900 transition-colors duration-200"
+            >
+              <Linkedin size={22} />
             </a>
           </div>
         </motion.div>

@@ -53,19 +53,19 @@ export default function Navbar() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
 
           {/* Logo */}
-          <a
-            href="#"
-            onClick={closeMenu}
-            className="group flex-shrink-0"
-            aria-label="Akash Abhang – home"
-          >
-            <h1 className="text-lg sm:text-xl font-black tracking-tighter text-slate-900 flex items-center gap-1 uppercase">
-              Akash{" "}
-              <span className="text-indigo-600 italic underline decoration-2 underline-offset-4 group-hover:translate-x-0.5 transition-transform duration-200">
-                Abhang
-              </span>
-            </h1>
-          </a>
+<a
+  href="#"
+  onClick={closeMenu}
+  className="group flex-shrink-0 outline-none focus:ring-0 focus:outline-none"
+  aria-label="Akash Abhang – home"
+>
+  <h1 className="text-lg sm:text-xl font-black tracking-tighter text-slate-900 flex items-center gap-1 uppercase">
+    Akash{" "}
+    <span className="text-indigo-600 italic underline decoration-2 underline-offset-4 group-hover:translate-x-0.5 transition-transform duration-200">
+      Abhang
+    </span>
+  </h1>
+</a>
 
           {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">

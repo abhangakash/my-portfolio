@@ -1,106 +1,134 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, MapPin, CheckCircle2, Building2 } from "lucide-react";
+import { Briefcase, Calendar, MapPin, CheckCircle2, Building2, Code2, Zap } from "lucide-react";
 
 export default function Experience() {
   const experiences = [
     {
       company: "Bynaric Systems Pvt. Ltd.",
-      role: "Software Developer Intern",
-      duration: "Nov 2025 – Present",
-      location: "Pune, India",
-      description: "Contributing to the development of enterprise-level Management Information Systems (MIS), focusing on data-driven decision tools and scalable full-stack architecture.",
+      role: "Junior Software Developer",
+      type: "Full-time",
+      duration: "March 2026 – Present",
+      location: "Mumbai, India",
+      isCurrent: true,
+      color: "indigo",
+      projects: ["FRA", "MSBTE", "RBTE"],
+      description: "Developing core web modules and data management tools for Maharashtra state educational boards and regulatory authorities.",
       achievements: [
-        "Architected and maintained modular MIS components to streamline business operations and analytics reporting.",
-        "Engineered robust backend logic and optimized APIs to ensure seamless data flow across high-availability modules.",
-        "Collaborated in an Agile environment to translate complex system requirements into scalable, production-ready software.",
-        "Enhanced system performance by analyzing user needs and refactoring legacy data structures for better efficiency."
+        "Developing and maintaining key features for the MSBTE and RBTE student portals to ensure smooth academic workflows.",
+        "Contributing to the FRA project by building user-friendly forms and data-grid views for staff.",
+        "Implementing responsive frontend components and integrating REST APIs to improve data accuracy across portals.",
+        "Optimizing database queries and backend logic to improve system reliability and user response times."
       ],
-      skills: ["Full Stack", "MIS Systems", "API Design", "Database Optimization"]
+      skills: ["React.js", "Node.js", "MySQL", "REST APIs", "HTML", "CSS"]
+    },
+    {
+      company: "Bynaric Systems Pvt. Ltd.",
+      role: "Software Developer Intern",
+      type: "Internship",
+      duration: "Nov 2025 – Feb 2026",
+      location: "Pune, India",
+      isCurrent: false,
+      color: "emerald",
+      projects: ["Polytechnic MIS", "Maharashtra Nursing Council"],
+      description: "Contributed to the development of public sector management systems for nursing and technical education.",
+      achievements: [
+        "Worked on the student registration and profile modules for the Government Polytechnic MIS.",
+        "Developed dashboard components for the Maharashtra Nursing Council to help automate document verification.",
+        "Refactored existing code to improve frontend performance and maintainability across different modules.",
+        "Collaborated with the QA team to identify and resolve critical UI/UX bugs before project deployment."
+      ],
+      skills: ["JavaScript", "React", "API Integration", "Git", "UI Design"]
     }
   ];
 
   return (
-    <section id="experience" className="bg-white py-24 px-6 border-y border-slate-100">
-      <div className="max-w-4xl mx-auto">
+    <section id="experience" className="bg-slate-50 py-16 md:py-24 px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto">
         
-        {/* Section Header */}
-        <div className="mb-16 border-l-4 border-indigo-600 pl-6">
-          <h2 className="text-xs font-black tracking-[0.3em] text-indigo-600 uppercase mb-2">
-            Professional Journey
-          </h2>
-          <h3 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">
-            Work <span className="text-slate-400 font-light italic">Experience.</span>
-          </h3>
+        <div className="mb-12 border-l-4 border-slate-900 pl-6">
+          <h2 className="text-xs font-black tracking-widest text-slate-500 uppercase mb-2">Professional Journey</h2>
+          <h3 className="text-4xl font-black text-slate-900">Career <span className="text-indigo-600">Experience.</span></h3>
         </div>
 
-        <div className="space-y-12">
+        <div className="flex flex-col gap-8">
           {experiences.map((exp, idx) => (
             <motion.div 
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-slate-50 border border-slate-200 rounded-[2.5rem] p-8 md:p-12 shadow-sm hover:shadow-xl hover:border-indigo-200 transition-all duration-500 group"
+              className={`relative overflow-hidden bg-white border-2 rounded-3xl p-6 md:p-10 transition-all duration-300 ${
+                exp.isCurrent ? 'border-indigo-600 shadow-xl scale-[1.01]' : 'border-slate-200 opacity-90'
+              }`}
             >
-              {/* Job Header */}
-              <div className="flex flex-col md:flex-row md:items-start justify-between mb-10 gap-6">
-                <div className="flex gap-5">
-                  <div className="hidden sm:flex w-14 h-14 bg-white rounded-2xl border border-slate-200 items-center justify-center text-indigo-600 shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500">
+              {/* Status Ribbon for Current Role */}
+              {exp.isCurrent && (
+                <div className="absolute top-0 right-0 bg-indigo-600 text-white px-6 py-1 rounded-bl-2xl font-black text-[10px] uppercase tracking-tighter">
+                  Current Role
+                </div>
+              )}
+
+              <div className="flex flex-col lg:flex-row gap-8">
+                {/* Left Side: Basic Info */}
+                <div className="lg:w-1/3">
+                  <div className={`inline-flex p-3 rounded-2xl mb-4 ${exp.isCurrent ? 'bg-indigo-100 text-indigo-600' : 'bg-emerald-100 text-emerald-600'}`}>
                     <Building2 size={28} />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2 text-indigo-600 mb-2">
-                      <Briefcase size={14} className="fill-indigo-50" />
-                      <span className="font-black uppercase tracking-widest text-[10px]">{exp.role}</span>
+                  <h4 className="text-2xl font-black text-slate-900 mb-1">{exp.company}</h4>
+                  <div className="flex items-center gap-2 font-bold text-indigo-600 mb-4 uppercase text-xs tracking-wider">
+                    <Briefcase size={14} /> {exp.role}
+                  </div>
+                  
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center gap-2 text-slate-500 text-xs font-bold">
+                      <Calendar size={14} /> {exp.duration}
                     </div>
-                    <h4 className="text-3xl font-bold text-slate-900 tracking-tight">{exp.company}</h4>
+                    <div className="flex items-center gap-2 text-slate-500 text-xs font-bold">
+                      <MapPin size={14} /> {exp.location}
+                    </div>
+                  </div>
+
+                  {/* Project Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {exp.projects.map(p => (
+                      <span key={p} className={`px-2 py-1 rounded-md text-[10px] font-black border ${exp.isCurrent ? 'bg-indigo-50 border-indigo-100 text-indigo-700' : 'bg-emerald-50 border-emerald-100 text-emerald-700'}`}>
+                        {p}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                
-                <div className="flex flex-col md:items-end text-slate-500 text-xs font-bold gap-2">
-                  <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">
-                    <Calendar size={14} className="text-indigo-500" /> {exp.duration}
+
+                {/* Right Side: Details */}
+                <div className="lg:w-2/3 border-t lg:border-t-0 lg:border-l border-slate-100 pt-6 lg:pt-0 lg:pl-8">
+                  <p className="text-slate-600 font-medium mb-6 leading-relaxed">
+                    {exp.description}
+                  </p>
+
+                  <div className="space-y-4 mb-8">
+                    {exp.achievements.map((item, i) => (
+                      <div key={i} className="flex items-start gap-3 group">
+                        <div className={`mt-1 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${exp.isCurrent ? 'bg-indigo-100' : 'bg-emerald-100'}`}>
+                          <Zap size={12} className={exp.isCurrent ? 'text-indigo-600' : 'text-emerald-600'} />
+                        </div>
+                        <p className="text-slate-700 text-sm font-semibold leading-relaxed">{item}</p>
+                      </div>
+                    ))}
                   </div>
-                  <div className="flex items-center gap-2 px-3">
-                    <MapPin size={14} className="text-slate-400" /> {exp.location}
+
+                  <div className="flex flex-wrap gap-2">
+                    {exp.skills.map(skill => (
+                      <span key={skill} className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-bold uppercase tracking-tight">
+                        <Code2 size={10} /> {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </div>
-
-              {/* Summary */}
-              <div className="relative mb-10">
-                <p className="text-slate-600 text-lg leading-relaxed font-medium relative z-10">
-                  {exp.description}
-                </p>
-                <div className="absolute -left-4 top-0 bottom-0 w-1 bg-indigo-100 rounded-full" />
-              </div>
-
-              {/* Achievements List */}
-              <div className="grid gap-5 mb-10">
-                {exp.achievements.map((point, i) => (
-                  <div key={i} className="flex items-start gap-4 group/point">
-                    <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center group-hover/point:bg-emerald-500 transition-colors">
-                      <CheckCircle2 size={12} className="text-emerald-600 group-hover/point:text-white transition-colors" />
-                    </div>
-                    <p className="text-slate-700 leading-relaxed font-semibold text-sm md:text-base">{point}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Tech Stack Used in this Job */}
-              <div className="flex flex-wrap gap-2 pt-8 border-t border-slate-200">
-                {exp.skills.map(skill => (
-                  <span key={skill} className="px-4 py-2 bg-white border border-slate-200 text-slate-500 rounded-xl text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 hover:text-indigo-600 transition-colors cursor-default">
-                    {skill}
-                  </span>
-                ))}
               </div>
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

@@ -128,6 +128,7 @@ export default function FilesPage() {
   const [activeTag, setActiveTag] = useState('all')
   const [search, setSearch] = useState('')
   const [openingId, setOpeningId] = useState(null)
+  const [downloadingId, setDownloadingId] = useState(null)
 
   async function fetchFiles() {
     setLoading(true)
@@ -138,10 +139,23 @@ export default function FilesPage() {
 
   useEffect(() => { fetchFiles() }, [])
 
-  async function downloadFile(e, f) {
+  async function viewFile(e, f) {
     if (e) e.stopPropagation()
     if (openingId) return
     setOpeningId(f.id)
+    const res = await fetch('/api/vault/files', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: f.storage_path })
+    })
+    if (res.ok) { const { url } = await res.json(); window.open(url, '_blank') }
+    setOpeningId(null)
+  }
+
+  async function downloadFile(e, f) {
+    if (e) e.stopPropagation()
+    if (downloadingId) return
+    setDownloadingId(f.id)
     try {
       const res = await fetch('/api/vault/files', {
         method: 'PATCH',
@@ -164,7 +178,7 @@ export default function FilesPage() {
     } catch (err) {
       console.error('Download failed', err)
     }
-    setOpeningId(null)
+    setDownloadingId(null)
   }
 
   async function deleteFile(e, f) {
@@ -226,7 +240,7 @@ export default function FilesPage() {
                 const tag = getTag(f.tag)
                 const ext = f.storage_path?.split('.').pop()?.toLowerCase() || ''
                 return (
-                  <div key={f.id} onClick={(e) => downloadFile(e, f)}
+                  <div key={f.id} onClick={(e) => viewFile(e, f)}
                     className="bg-white border border-slate-100 hover:border-slate-200 rounded-2xl p-4 transition-all relative cursor-pointer active:scale-[0.98]">
                     
                     <div className="flex items-start justify-between mb-3">
@@ -236,6 +250,16 @@ export default function FilesPage() {
                       </div>
                       
                       <div className="flex items-center gap-1">
+                        <button 
+                          onClick={(e) => viewFile(e, f)} 
+                          title="View file"
+                          className="p-2 rounded-lg text-slate-400 hover:text-blue-500 hover:bg-blue-50 transition-colors"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                          </svg>
+                        </button>
                         <button 
                           onClick={(e) => downloadFile(e, f)} 
                           title="Download file"
@@ -268,7 +292,10 @@ export default function FilesPage() {
                       <p className="text-slate-300 text-[10px]">
                         {new Date(f.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </p>
-                      {openingId === f.id && <div className="w-3 h-3 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>}
+                      <div className="flex items-center gap-1">
+                        {openingId === f.id && <div className="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>}
+                        {downloadingId === f.id && <div className="w-3 h-3 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>}
+                      </div>
                     </div>
                   </div>
                 )

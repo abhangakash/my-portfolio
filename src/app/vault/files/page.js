@@ -22,11 +22,12 @@ const EXT_ICONS = {
   md: '📋', png: '🖼️', jpg: '🖼️', jpeg: '🖼️',
 }
 
-// ─── UPLOAD FORM (Restored all original logic) ──────────────────────────────
+// ─── UPLOAD FORM (With Upload Progress Percentage) ──────────────────────────
 function UploadForm({ onUpload, onClose }) {
   const [file, setFile] = useState(null)
   const [form, setForm] = useState({ name: '', description: '', tag: 'general' })
   const [uploading, setUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
   const [err, setErr] = useState('')
   const [dragging, setDragging] = useState(false)
   const inputRef = useRef()
@@ -39,18 +40,52 @@ function UploadForm({ onUpload, onClose }) {
     if (!form.name) set('name', f.name.replace(/\.[^/.]+$/, ''))
   }
 
-  async function submit() {
+  function submit() {
     if (!file) { setErr('Select a file first'); return }
-    setUploading(true); setErr('')
+    setUploading(true); setUploadProgress(0); setErr('')
+
     const fd = new FormData()
     fd.append('file', file)
     fd.append('name', form.name || file.name)
     fd.append('description', form.description)
     fd.append('tag', form.tag)
-    const res = await fetch('/api/vault/files', { method: 'POST', body: fd })
-    if (res.ok) { onUpload(await res.json()); onClose() }
-    else { const d = await res.json(); setErr(d.error || 'Upload failed') }
-    setUploading(false)
+
+    const xhr = new XMLHttpRequest()
+    xhr.open('POST', '/api/vault/files', true)
+
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) {
+        const percent = Math.round((e.loaded * 100) / e.total)
+        setUploadProgress(percent)
+      }
+    }
+
+    xhr.onload = () => {
+      setUploading(false)
+      if (xhr.status >= 200 && xhr.status < 300) {
+        try {
+          const data = JSON.parse(xhr.responseText)
+          onUpload(data)
+          onClose()
+        } catch {
+          setErr('Invalid server response')
+        }
+      } else {
+        try {
+          const d = JSON.parse(xhr.responseText)
+          setErr(d.error || 'Upload failed')
+        } catch {
+          setErr('Upload failed')
+        }
+      }
+    }
+
+    xhr.onerror = () => {
+      setUploading(false)
+      setErr('Network error during upload')
+    }
+
+    xhr.send(fd)
   }
 
   const tag = getTag(form.tag)
@@ -98,6 +133,7 @@ function UploadForm({ onUpload, onClose }) {
               </div>
             )}
           </div>
+          {err && <p className="text-red-500 text-xs font-medium text-center">{err}</p>}
           <div className="flex gap-1.5 flex-wrap">
             {FILE_TAGS.map(t => (
               <button key={t.key} onClick={() => set('tag', t.key)}
@@ -113,7 +149,9 @@ function UploadForm({ onUpload, onClose }) {
             className="w-full bg-slate-50 text-slate-700 border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-slate-400" />
           <button onClick={submit} disabled={uploading || !file}
             className="w-full py-3.5 rounded-xl font-bold text-white active:scale-95 disabled:opacity-50 text-sm transition-all"
-            style={{ backgroundColor: tag.color }}>{uploading ? 'Uploading...' : 'Upload File'}</button>
+            style={{ backgroundColor: tag.color }}>
+            {uploading ? `Uploading... ${uploadProgress}%` : 'Upload File'}
+          </button>
         </div>
       </div>
     </div>

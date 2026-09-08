@@ -4,9 +4,9 @@ import Link from 'next/link'
 
 const FILE_TAGS = [
   { key: 'ai-analysis', label: 'AI Analysis', icon: '🤖', color: '#3b82f6', bg: '#eff6ff', border: '#bfdbfe' },
-  { key: 'exam',         label: 'Exam Notes',   icon: '📚', color: '#8b5cf6', bg: '#f5f3ff', border: '#ddd6fe' },
-  { key: 'work',         label: 'Work Docs',    icon: '💼', color: '#6b7280', bg: '#f9fafb', border: '#e5e7eb' },
-  { key: 'general',      label: 'General',      icon: '📄', color: '#10b981', bg: '#ecfdf5', border: '#a7f3d0' },
+  { key: 'exam',         label: 'Exam Notes',    icon: '📚', color: '#8b5cf6', bg: '#f5f3ff', border: '#ddd6fe' },
+  { key: 'work',         label: 'Work Docs',     icon: '💼', color: '#6b7280', bg: '#f9fafb', border: '#e5e7eb' },
+  { key: 'general',      label: 'General',       icon: '📄', color: '#10b981', bg: '#ecfdf5', border: '#a7f3d0' },
 ]
 
 function getTag(key) { return FILE_TAGS.find(t => t.key === key) || FILE_TAGS[FILE_TAGS.length - 1] }
@@ -218,11 +218,23 @@ export default function FilesPage() {
                         <span className="text-[9px] font-bold leading-none uppercase" style={{ color: tag.color }}>{ext}</span>
                       </div>
                       
-                      <button onClick={(e) => deleteFile(e, f)} className="p-2 rounded-lg text-slate-300 hover:text-red-500 hover:bg-red-50 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                        </svg>
-                      </button>
+                      <div className="flex items-center gap-1">
+                        <button 
+                          onClick={(e) => { e.stopPropagation(); openFile(f); }} 
+                          title="View file"
+                          className="p-2 rounded-lg text-slate-400 hover:text-blue-500 hover:bg-blue-50 transition-colors"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                          </svg>
+                        </button>
+                        <button onClick={(e) => deleteFile(e, f)} className="p-2 rounded-lg text-slate-300 hover:text-red-500 hover:bg-red-50 transition-colors">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                          </svg>
+                        </button>
+                      </div>
                     </div>
 
                     <h3 className="text-slate-700 font-semibold text-sm mb-1 line-clamp-2 leading-snug">{f.name}</h3>
